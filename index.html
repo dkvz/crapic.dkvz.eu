@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greubi</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    animation-name: bg-color;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    /* Safari 4.0 - 8.0 */
+
+    -webkit-animation-name: bg-color;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+
+  }
+  /* Safari 4.0 - 8.0 */
+  @-webkit-keyframes bg-color {
+    0%  {background-color: #fc102f}
+    16% {background-color: #ec72f8}
+    33% {background-color: #88f98b}
+    49% {background-color: #f8ef8a}
+    65% {background-color: #7648ff}
+    82% {background-color: #1d6d94}
+    100% {background-color: #3d31ff}
+  }
+
+  /* Standard syntax */
+  @keyframes bg-color {
+      0%  {background-color: #fc102f}
+      16% {background-color: #ec72f8}
+      33% {background-color: #88f98b}
+      49% {background-color: #f8ef8a}
+      65% {background-color: #7648ff}
+      82% {background-color: #1d6d94}
+      100% {background-color: #3d31ff}
+  }
+
+  #centerImg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+  }
+
+</style>
+</head>
+<body id="bod">
+
+  <img id="centerImg" src="img/spinner.gif" />
+
+<script>
+  var image = document.querySelector('#centerImg');
+  var downloadingImage = new Image();
+  downloadingImage.onload = function() {
+    image.src = this.src;
+    image.style.width = 'auto';
+    image.style.height = '100%';
+  };
+  downloadingImage.src = 'img/crapic.png';
+</script>
+
+</body>
+</html>
