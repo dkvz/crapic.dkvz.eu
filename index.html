@@ -58,15 +58,17 @@
 </head>
 <body id="bod">
 
-  <img id="centerImg" src="img/spinner.gif" />
+<img id="centerImg" src="img/spinner.gif" />
 
 <script>
   var image = document.querySelector('#centerImg');
   var downloadingImage = new Image();
   downloadingImage.onload = function() {
     image.src = this.src;
-    image.style.width = 'auto';
-    image.style.height = '100%';
+    //image.style.width = 'auto';
+    //image.style.height = 'auto';
+    image.style.maxWidth = '140.75vh';
+    image.style.maxHeight = '71.05vw';
   };
   downloadingImage.src = 'img/crapic.png';
 </script>
