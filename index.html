@@ -45,6 +45,8 @@
   }
 
   #centerImg {
+    margin: 0;
+    padding: 0;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -52,6 +54,30 @@
     transform: -webkit-translate(-50%, -50%);
     transform: -moz-translate(-50%, -50%);
     transform: -ms-translate(-50%, -50%);
+  }
+
+  .imgFade {
+    animation-name: crapic;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-name: crapic;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+  }
+
+  /* Safari 4.0 - 8.0 */
+  @-webkit-keyframes crapic {
+    from  {opacity: 0}
+    to {opacity: 1}
+  }
+
+  /* Standard syntax */
+  @keyframes crapic {
+    from  {opacity: 0}
+    to {opacity: 1}
   }
 
 </style>
@@ -69,6 +95,7 @@
     //image.style.height = 'auto';
     image.style.maxWidth = '140.75vh';
     image.style.maxHeight = '71.05vw';
+    image.classList.add('imgFade');
   };
   downloadingImage.src = 'img/crapic.png';
 </script>
