@@ -104,6 +104,10 @@
       //image.style.height = 'auto';
       element.style.maxWidth = image.maxWidth;
       element.style.maxHeight = image.maxHeight;
+      // To re-trigger the animation I have
+      // to remove the element and add it
+      // back again... God I love JS
+      void element.offsetWidth;
       element.classList.add('imgFade');
     };
     downloadingImage.src = image.src;
@@ -113,6 +117,7 @@
     element.src = 'img/spinner.gif';
     element.style.maxWidth = '';
     element.style.maxHeight = '';
+    element.classList.remove('imgFade');
   }
 
   var images = Array();
@@ -125,8 +130,8 @@
   var index = 0;
   var image = document.querySelector('#centerImg');
   changeImage(image, images[index]);
+  // Isn't it better to use image.addEventListener ?
   image.onclick = function() {
-    image.classList.remove('imgFade');
     resetSpinner(image);
     if (++index == images.length) {
       index = 0;
