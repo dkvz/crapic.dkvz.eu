@@ -96,17 +96,44 @@
 <img id="centerImg" src="img/spinner.gif" />
 
 <script>
+  function changeImage(element, image) {
+    var downloadingImage = new Image();
+    downloadingImage.onload = function() {
+      element.src = this.src;
+      //image.style.width = 'auto';
+      //image.style.height = 'auto';
+      element.style.maxWidth = image.maxWidth;
+      element.style.maxHeight = image.maxHeight;
+      element.classList.add('imgFade');
+    };
+    downloadingImage.src = image.src;
+  }
+
+  function resetSpinner(element) {
+    element.src = 'img/spinner.gif';
+    element.style.maxWidth = '';
+    element.style.maxHeight = '';
+  }
+
+  var images = Array();
+  // If image is landscape:
+  // maxHeight = H / W * 100
+  // maxWidth = W / H * 100
+  // If image is portrait, this is reverse. I suppose.
+  images.push({src: 'img/crapic.png', maxWidth: '140.75vh', maxHeight: '71.05vw'});
+  images.push({src: 'img/crapic_2.png', maxWidth: '82.8vh', maxHeight: '120.77vw'});
+  var index = 0;
   var image = document.querySelector('#centerImg');
-  var downloadingImage = new Image();
-  downloadingImage.onload = function() {
-    image.src = this.src;
-    //image.style.width = 'auto';
-    //image.style.height = 'auto';
-    image.style.maxWidth = '140.75vh';
-    image.style.maxHeight = '71.05vw';
-    image.classList.add('imgFade');
+  changeImage(image, images[index]);
+  image.onclick = function() {
+    image.classList.remove('imgFade');
+    resetSpinner(image);
+    if (++index == images.length) {
+      index = 0;
+    }
+    changeImage(image, images[index]);
   };
-  downloadingImage.src = 'img/crapic.png';
+
 </script>
 
 </body>
