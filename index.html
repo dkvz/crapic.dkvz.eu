@@ -104,9 +104,9 @@
       //image.style.height = 'auto';
       element.style.maxWidth = image.maxWidth;
       element.style.maxHeight = image.maxHeight;
-      // To re-trigger the animation I have
-      // to remove the element and add it
-      // back again... God I love JS
+      // To re-trigger the animation I have to 
+      // trigger some kind of re-render.
+      // This works for Chrome:
       void element.offsetWidth;
       element.classList.add('imgFade');
     };
@@ -121,10 +121,8 @@
   }
 
   var images = Array();
-  // If image is landscape:
   // maxHeight = H / W * 100
   // maxWidth = W / H * 100
-  // If image is portrait, this is reverse. I suppose.
   images.push({src: 'img/crapic.png', maxWidth: '140.75vh', maxHeight: '71.05vw'});
   images.push({src: 'img/crapic_2.png', maxWidth: '82.8vh', maxHeight: '120.77vw'});
   var index = 0;
