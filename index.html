@@ -23,7 +23,6 @@
     animation-iteration-count: infinite;
     animation-direction: alternate;
     /* Safari 4.0 - 8.0 */
-
     -webkit-animation-name: bg-color;
     -webkit-animation-duration: 2s;
     -webkit-animation-timing-function: linear;
@@ -44,13 +43,83 @@
 
   /* Standard syntax */
   @keyframes bg-color {
-      0%  {background-color: #fc102f}
-      16% {background-color: #ec72f8}
-      33% {background-color: #88f98b}
-      49% {background-color: #f8ef8a}
-      65% {background-color: #7648ff}
-      82% {background-color: #1d6d94}
-      100% {background-color: #3d31ff}
+    0%  {background-color: #fc102f}
+    16% {background-color: #ec72f8}
+    33% {background-color: #88f98b}
+    49% {background-color: #f8ef8a}
+    65% {background-color: #7648ff}
+    82% {background-color: #1d6d94}
+    100% {background-color: #3d31ff}
+  }
+
+ .imgVibrateH {    
+    animation-name: vibrateH, crapic;
+    animation-duration: 0.1s, 1.2s;
+    animation-timing-function: ease-in, linear;
+    /* I think this is 0 by default. */    
+    animation-delay: 0s, 0s;
+    animation-iteration-count: 15, 1;
+    -webkit-animation-name: vibrateH, crapic;
+    -webkit-animation-duration: 0.1s, 1.2s;
+    -webkit-animation-timing-function: ease-in, linear;
+    -webkit-animation-delay: 0s, 0s;
+    -webkit-animation-iteration-count: 15, 1;
+  }
+
+  .imgVibrateW {    
+    animation-name: vibrateW, crapic;
+    animation-duration: 0.1s, 1.2s;
+    animation-timing-function: ease-in, linear;
+    /* I think this is 0 by default. */    
+    animation-delay: 0s, 0s;
+    animation-iteration-count: 15, 1;
+    -webkit-animation-name: vibrateW, crapic;
+    -webkit-animation-duration: 0.1s, 1.2s;
+    -webkit-animation-timing-function: ease-in, linear;
+    -webkit-animation-delay: 0s, 0s;
+    -webkit-animation-iteration-count: 15, 1;
+  }
+
+  @keyframes vibrateH {
+    0% {top: 50%}
+    25% {top: 49%}
+    50% {top: 50%}
+    75% {top: 51%}
+    100% {top: 50%}
+  }
+
+  @-webkit-keyframes vibrateH {
+    0% {top: 50%}
+    25% {top: 49%}
+    50% {top: 50%}
+    75% {top: 51%}
+    100% {top: 50%}
+  }
+
+  @keyframes vibrateW {
+    0% {left: 50%}
+    25% {left: 49%}
+    50% {left: 50%}
+    75% {left: 51%}
+    100% {left: 50%}
+  }
+
+  @-webkit-keyframes vibrateW {
+    0% {left: 50%}
+    25% {left: 49%}
+    50% {left: 50%}
+    75% {left: 51%}
+    100% {left: 50%}
+  }
+
+  @-webkit-keyframes crapic {
+    from  {opacity: 0}
+    to {opacity: 1}
+  }
+
+  @keyframes crapic {
+    from  {opacity: 0}
+    to {opacity: 1}
   }
 
   #centerImg {
@@ -63,30 +132,6 @@
     transform: -webkit-translate(-50%, -50%);
     transform: -moz-translate(-50%, -50%);
     transform: -ms-translate(-50%, -50%);
-  }
-
-  .imgFade {
-    animation-name: crapic;
-    animation-duration: 1.2s;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-    /* Safari 4.0 - 8.0 */
-    -webkit-animation-name: crapic;
-    -webkit-animation-duration: 1.2s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: 1;
-  }
-
-  /* Safari 4.0 - 8.0 */
-  @-webkit-keyframes crapic {
-    from  {opacity: 0}
-    to {opacity: 1}
-  }
-
-  /* Standard syntax */
-  @keyframes crapic {
-    from  {opacity: 0}
-    to {opacity: 1}
   }
 
 </style>
@@ -102,13 +147,17 @@
       element.src = this.src;
       //image.style.width = 'auto';
       //image.style.height = 'auto';
-      element.style.maxWidth = image.maxWidth;
-      element.style.maxHeight = image.maxHeight;
+      element.style.maxWidth = image.maxWidth + 'vh';
+      element.style.maxHeight = image.maxHeight + 'vw';
       // To re-trigger the animation I have to 
       // trigger some kind of re-render.
       // This works for Chrome:
       void element.offsetWidth;
-      element.classList.add('imgFade');
+      if (image.maxWidth > image.maxHeight) {
+        element.classList.add('imgVibrateW');
+      } else {
+        element.classList.add('imgVibrateH');
+      }
     };
     downloadingImage.src = image.src;
   }
@@ -117,14 +166,14 @@
     element.src = 'img/spinner.gif';
     element.style.maxWidth = '';
     element.style.maxHeight = '';
-    element.classList.remove('imgFade');
+    element.classList.remove('imgVibrateW', 'imgVibrateH');
   }
 
   var images = Array();
   // maxHeight = H / W * 100
   // maxWidth = W / H * 100
-  images.push({src: 'img/crapic.png', maxWidth: '140.75vh', maxHeight: '71.05vw'});
-  images.push({src: 'img/crapic_2.png', maxWidth: '82.8vh', maxHeight: '120.77vw'});
+  images.push({src: 'img/crapic.png', maxWidth: 140.75, maxHeight: 71.05});
+  images.push({src: 'img/crapic_2.png', maxWidth: 82.8, maxHeight: 120.77});
   var index = 0;
   var image = document.querySelector('#centerImg');
   changeImage(image, images[index]);
